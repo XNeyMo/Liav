@@ -1,0 +1,39 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+stylehub/node_modules
+stylehub/.pnp
+stylehub/.pnp.js
+
+# testing
+stylehub/coverage
+
+# production
+stylehub/build
+
+# misc
+stylehub/.DS_Store
+stylehub/.env.local
+stylehub/.env.development.local
+stylehub/.env.test.local
+stylehub/.env.production.local
+
+stylehub/npm-debug.log*
+stylehub/yarn-debug.log*
+stylehub/yarn-error.log*
+
+# Virtual env
+./backend/.venv/
+./.venv
+
+.__pycache__/
+.vscode/
+.idea/
+./backend/.idea/
+
+venv/
+
+__pycache__/
+*.pyc
+.DS_Store
+.env
