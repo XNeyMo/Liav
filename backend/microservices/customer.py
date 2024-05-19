@@ -22,9 +22,6 @@ async def get_customer(customer_email: str):
         if customer['email'] == customer_email:
             return customer
 
-        else:
-            raise HTTPException(status_code=404, detail='Customer not found')
-
 @router.put('/{customer_id}/')
 async def update_customer(customer_id: str, customer: Customer):
     customer_before_update = customers_collection.find_one({'_id': ObjectId(customer_id)})

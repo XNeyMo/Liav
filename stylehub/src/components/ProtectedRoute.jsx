@@ -1,15 +1,11 @@
 import { React } from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ element: Element, user, ...rest }) => {
-	return (
-		<Route
-			{...rest}
-			element={
-				user.admin ? <Element userType='admin' user={user} /> : <Element userType="user" user={user} />
-			}
-		/>
-	)
+const ProtectedRoute = () => {
+	let auth = {'token': true}
+
+	return auth.token ? <Outlet /> : <Navigate to="/auth" />;
+	
 }
 
 export default ProtectedRoute;

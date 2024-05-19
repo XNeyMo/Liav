@@ -48,9 +48,6 @@ async def get_product(product_category: str):
         if product['category'] == product_category:
             return product
 
-        else:
-            raise HTTPException(status_code=404, detail='Product not found')
-
 @router.put('/{product_id}/')
 async def update_product(product_id: str, product: Product):
     product_before_update = products_collection.find_one({'_id': ObjectId(product_id)})

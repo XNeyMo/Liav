@@ -1,5 +1,5 @@
-import { React, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { React } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -13,8 +13,10 @@ function App() {
       <Routes>
         <Route path="/auth" element={<AuthPage />} />
 
-        <Route path="/" element={<HomePage />} />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Route>
       </Routes>
     </Router>
   );

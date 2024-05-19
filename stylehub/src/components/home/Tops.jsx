@@ -9,7 +9,7 @@ const Tops = () => {
 		<section className='px-10'>
 			<h1 className='text-5xl font-bold py-5 text-center'>TOPS</h1>
 
-			<div className='flex gap-2'>
+			<div className='flex gap-4'>
 			        {products.length > 0 ? (
 					products.map(product => (
 						<a href='#' key={product.id}>

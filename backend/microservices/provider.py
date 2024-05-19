@@ -29,9 +29,6 @@ async def get_provider(provider_email: str):
         if provider['email'] == provider_email:
             return provider
 
-        else:
-            raise HTTPException(status_code=404, detail='Provider not found')
-
 @router.put('/{provider_id}/')
 async def update_provider(provider_id: str, provider: Provider):
     provider_before_update = providers_collection.find_one({'_id': ObjectId(provider_id)})

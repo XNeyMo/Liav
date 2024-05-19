@@ -1,23 +1,24 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 const useLogin = () => {
+  const navigate = useNavigate();
+
   const [error, setError] = useState(null);
-  
+
   const Login = async (email, password) => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/user/${email}`);
+      const response = await axios.get(`https://liavback.onrender.com/user/${email}`);
       const user = response.data;
 
       if (user.password === password) {
-        return user;
+        navigate(user.admin ? '/admin' : '/');
       } else {
         setError('Invalid credentials');
-        return null;
       }
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');
-      return null;
     }
   }
 

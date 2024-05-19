@@ -4,7 +4,7 @@ const useFetchProducts = (category) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/product/all')
+    fetch('https://liavback.onrender.com/product/all')
     .then(response => response.json())
     .then(data => {
       if (category) {
