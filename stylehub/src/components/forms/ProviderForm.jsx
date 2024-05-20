@@ -1,32 +1,29 @@
 import { React, useState, useEffect } from 'react';
 
-import useUpdateCustomer from '../../hooks/update/useUpdateCustomer';
+import useUpdateProvider from '../../hooks/update/useUpdateProvider';
 
-const CustomerForm = ({ customer, onClose }) => {
-	const { updateCustomer, error } = useUpdateCustomer();
+const ProviderForm = ({ provider, onClose }) => {
+	const { updateProvider, error } = useUpdateProvider();
 
 	const [formData, setFormData] = useState({
-		user_id: '',
-		username: '',
+		name: '',
 		email: '',
-		password: '',
 		phone: '',
-		admin: false,
-		credits: 0,
 		address: {
 			street: '',
 			city: '',
 			state: '',
 			zip: '',
 			country: '',
-		}
+		},
+		products: [],
 	});
 
 	useEffect(() => {
-		if (customer) {
-			setFormData(customer);
+		if (provider) {
+			setFormData(provider);
 		}
-	}, [customer]);
+	}, [provider]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -39,8 +36,8 @@ const CustomerForm = ({ customer, onClose }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (customer && customer.id) {
-			await updateCustomer(customer.id, formData);
+		if (provider && provider.id) {
+			await updateProvider(provider.id, formData);
 			onClose();
 		} else {
 			console.error('Customer ID is required to update user');
@@ -53,7 +50,7 @@ const CustomerForm = ({ customer, onClose }) => {
 				type='text'
 				name='username'
 				placeholder='Username'
-				value={formData.username}
+				value={formData.name}
 				onChange={handleChange}
 				className='border p-2 rounded'
 			/>
@@ -68,29 +65,10 @@ const CustomerForm = ({ customer, onClose }) => {
 			/>
 
 			<input
-				type='password'
-				name='password'
-				placeholder='Password'
-				value={formData.password}
-				onChange={handleChange}
-				className='border p-2 rounded'
-			/>
-
-			<input
 				type='text'
 				name='phone'
 				placeholder='Phone'
 				value={formData.phone}
-				onChange={handleChange}
-				className='border p-2 rounded'
-			/>
-
-			<input
-				type='number'
-				step='0.01'
-				name='credits'
-				placeholder='Credits'
-				value={formData.credits}
 				onChange={handleChange}
 				className='border p-2 rounded'
 			/>
@@ -104,4 +82,4 @@ const CustomerForm = ({ customer, onClose }) => {
 	)
 }
 
-export default CustomerForm;
+export default ProviderForm;

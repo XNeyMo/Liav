@@ -65,7 +65,7 @@ const CustomerManagement = () => {
 			</table>
 
 			<Modal isOpen={isModalOpen} onClose={closeModal}>
-				<CustomerForm user={selectedCustomer} onClose={closeModal} />
+				<CustomerForm customer={selectedCustomer} onClose={closeModal} />
 			</Modal>
 		</div>
 	)

@@ -1,18 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const useUpdateCustomer = () => {
+const useUpdateProvider = () => {
   const [error, setError] = useState(null);
 
-  const updateCustomer = async (id, formData) => {
+  const updateProvider = async (id, formData) => {
     try {
-      const customerPayload = {
-        user_id: formData.user_id,
-        username: formData.username,
-        email: formData.email,
+      const providerPayload = {
+        name: formData.name,
+        email: formData.username,
         phone: formData.phone,
-        password: formData.password,
-        credits: formData.credits,
         address: {
           street: formData.address.street,
           city: formData.address.city,
@@ -20,15 +17,16 @@ const useUpdateCustomer = () => {
           zip: formData.address.zip,
           country: formData.address.country,
         },
+        products: formData.products,
       };
 
-      const response = await axios.put(`https://liavback.onrender.com/customer/${id}/`, customerPayload);
+      const response = await axios.put(`https://liavback.onrender.com/provider/${id}/`, providerPayload);
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');
     }
   }
 
-  return { updateCustomer, error };
+  return { updateProvider, error };
 }
 
-export default useUpdateCustomer;
+export default useUpdateProvider;

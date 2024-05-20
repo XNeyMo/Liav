@@ -15,7 +15,6 @@ const useUpdateUser = () => {
       };
 
       const response = await axios.put(`https://liavback.onrender.com/user/${id}/`, userPayload);
-      console.log(response.data);
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');
     }

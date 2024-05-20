@@ -25,7 +25,7 @@ async def create_provider(provider: Provider):
 
 @router.get('/{provider_email}/')
 async def get_provider(provider_email: str):
-    for provider in get_provider():
+    for provider in get_providers():
         if provider['email'] == provider_email:
             return provider
 

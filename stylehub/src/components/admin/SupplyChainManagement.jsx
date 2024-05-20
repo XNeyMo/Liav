@@ -1,9 +1,25 @@
-import { React } from 'react';
+import { React, useState } from 'react';
+
+import Modal from '../Modal';
+import ProviderForm from '../forms/ProviderForm'
 
 import useFetchProviders from '../../hooks/useFetchProviders';
 
 const SupplyChainManagement = () => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [selectedProvider, setSelectedProvider] = useState(null);
+
 	const providers = useFetchProviders();
+
+	const openModal = (provider) => {
+		setSelectedProvider(provider);
+		setIsModalOpen(true);
+	}
+
+	const closeModal = () => {
+		setSelectedProvider(null);
+		setIsModalOpen(false);
+	}
 
 	return (
 		<div className='max-h-[calc(100vh-3.25rem)] w-full p-10 flex flex-col justify-between'>
@@ -39,13 +55,17 @@ const SupplyChainManagement = () => {
 							<td>{provider.phone}</td>
 
 							<td>
-								<a href='#' className='font-bold text-old-copper-700 hover:text-old-copper-900'>Edit</a>
+								<a href='#' className='font-bold text-old-copper-700 hover:text-old-copper-900' onClick={() => openModal(provider)}>Edit</a>
 							</td>
 						</tr>
 					))}
 
 				</tbody>
 			</table>
+
+			<Modal isOpen={isModalOpen} onClose={closeModal}>
+				<ProviderForm provider={selectedProvider} onClose={closeModal} />
+			</Modal>
 		</div>
 	)
 }
