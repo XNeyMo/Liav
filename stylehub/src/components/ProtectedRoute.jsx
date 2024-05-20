@@ -1,11 +1,21 @@
 import { React } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 
-const ProtectedRoute = () => {
-	let auth = {'token': true}
+import { useAuth } from '../hooks/useAuth';
 
-	return auth.token ? <Outlet /> : <Navigate to="/auth" />;
-	
+const ProtectedRoute = ({ requiredAdmin }) => {
+	const { auth } = useAuth();
+	const location = useLocation();
+
+	if (!auth.isAuthenticated) {
+		return <Navigate to="/auth" state={{ from: location }}/>;
+	}
+
+	if (requiredAdmin && !auth.isAdmin) {
+		return <Navigate to="/" />;
+	}
+
+	return <Outlet />;
 }
 
 export default ProtectedRoute;

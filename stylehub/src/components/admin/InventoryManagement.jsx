@@ -1,6 +1,10 @@
 import { React } from 'react';
 
+import useFetchProducts from '../../hooks/useFetchProducts.js';
+
 const InventoryManagement = () => {
+	const products = useFetchProducts();
+
 	return (
 		<div className='max-h-[calc(100vh-3.25rem)] w-full p-10 flex flex-col justify-between'>
 			<div className='flex h-auto justify-between items-center'>
@@ -18,44 +22,31 @@ const InventoryManagement = () => {
 			<table className='mt-10 w-full pb-10 block overflow-y-auto text-sm *:*:*:px-6 *:*:*:py-3'>
 				<thead className='text-xs uppercase text-white bg-old-copper-700 sticky top-0'>
 					<tr>
-						<th className='text-left'>Product</th>
+						<th className='text-left'>id</th>
+						<th className='text-left'>Provider ID</th>
+						<th className='text-left'>Name</th>
 						<th className='text-left'>Price</th>
 						<th className='text-left'>Stock</th>
-						<th className='text-left'>Provider</th>
+						<th className='text-left'>Category</th>
 						<th></th>
 					</tr>
 				</thead>
 
-				<tbody className='*:border-b *:border-old-copper-700 *:*:whitespace-nowrap overflow-y-auto'>
-					<tr>
-						<td>Basic T-Shirt</td>
-						<td>15.99</td>
-						<td>120</td>
-						<td>United Textiles</td>
-						<td>
-							<a href='#' className='font-bold text-old-copper-700 hover:text-old-copper-900'>Edit</a>
-						</td>
-					</tr>
+				<tbody className='max-w-[calc(100%-5rem)] *:border-b *:border-old-copper-700 *:*:whitespace-nowrap overflow-y-auto'>
+					{products.map(product => (
+						<tr key={product.id}>
+							<td>{product.id}</td>
+							<td>{product.provider_id}</td>
+							<td>{product.name}</td>
+							<td>{product.price}</td>
+							<td>{product.stock}</td>
+							<td>{product.category}</td>
 
-					<tr>
-						<td>Slim-Fit Jeans</td>
-						<td>29.99</td>
-						<td>80</td>
-						<td>Fashion Denim</td>
-						<td>
-							<a href='#' className='font-bold text-old-copper-700 hover:text-old-copper-900'>Edit</a>
-						</td>
-					</tr>
-
-					<tr>
-						<td>Hooded Sweatshirt</td>
-						<td>35.99</td>
-						<td>50</td>
-						<td>Urban Apparel</td>
-						<td>
-							<a href='#' className='font-bold text-old-copper-700 hover:text-old-copper-900'>Edit</a>
-						</td>
-					</tr>
+							<td>
+								<a href='#' className='font-bold text-old-copper-700 hover:text-old-copper-900'>Edit</a>
+							</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>

@@ -7,6 +7,7 @@ import AdminHeader from '../components/headers/AdminHeader';
 import useAdminPage from '../hooks/useAdminPage';
 import Sidebar from '../components/admin/Sidebar';
 import UserManagement from '../components/admin/UserManagement';
+import CustomerManagement from '../components/admin/CustomerManagement';
 import InventoryManagement from '../components/admin/InventoryManagement';
 import SupplyChainManagement from '../components/admin/SupplyChainManagement';
 
@@ -17,6 +18,8 @@ const AdminPage = () => {
 		switch (selectedPage) {
 			case 'userManagement':
 				return <UserManagement />;
+			case 'customerManagement':
+				return <CustomerManagement />;
 			case 'inventoryManagement':
 				return <InventoryManagement />;
 			case 'supplyChainManagement':
@@ -30,7 +33,7 @@ const AdminPage = () => {
 		<main className='flex'>
 			<Sidebar onPageChange={changePage} selectedPage={selectedPage} />
 			
-			<section className='w-full h-full'>
+			<section className='w-3/4 h-full'>
 				<AdminHeader />
 
 				<div className='pt-[3.25rem] max-h-[calc(100vh-3.25rem)]'>

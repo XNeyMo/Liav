@@ -4,7 +4,7 @@ import GuestHeader from '../components/headers/GuestHeader';
 
 import useAuthForm from '../hooks/useAuthForm';
 import LoginForm from '../components/forms/LoginForm';
-import SigninForm from '../components/forms/SigninForm';
+import RegisterForm from '../components/forms/RegisterForm';
 
 const AuthPage = () => {
 	const { isLogin, toggleAuthForm } = useAuthForm();
@@ -20,7 +20,7 @@ const AuthPage = () => {
 				</div>
 
 				<div className='bg-white w-1/3 h-4/5 rounded-2xl flex flex-col items-center p-10 justify-between'>
-					{isLogin ? <LoginForm /> : <SigninForm />}
+					{isLogin ? <LoginForm /> : <RegisterForm />}
 
 					<button onClick={toggleAuthForm} className='text-gray underline hover:text-old-copper-700'>{isLogin ? 'Don\'t have an account?' : 'Already have an account?'}</button>
 				</div>

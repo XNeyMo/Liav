@@ -5,6 +5,7 @@ import AdminLogo from '../../assets/icons/adminlogo.png';
 import UserLogo from '../../assets/icons/usermanagement.svg';
 import InventoryLogo from '../../assets/icons/inventorymanagement.svg';
 import SupplyChainLogo from '../../assets/icons/supplychainmanagement.svg';
+
 import LogoutLogo from '../../assets/icons/logout.svg';
 
 const Sidebar = ({ onPageChange, selectedPage }) => {
@@ -21,6 +22,11 @@ const Sidebar = ({ onPageChange, selectedPage }) => {
 					<li onClick={() => onPageChange('userManagement')} className={`${isSelected('userManagement') ? 'bg-old-copper-900 text-white' : ''}`}>
 						<i className='fa-solid fa-user text-xl' />
 						<p>Users</p>
+					</li>
+
+					<li onClick={() => onPageChange('customerManagement')} className={`${isSelected('customerManagement') ? 'bg-old-copper-900 text-white' : ''}`}>
+						<i className='fa-solid fa-users text-xl' />
+						<p>Customers</p>
 					</li>
 
 					<li onClick={() => onPageChange('inventoryManagement')} className={`${isSelected('inventoryManagement') ? 'bg-old-copper-900 text-white' : ''}`}>
