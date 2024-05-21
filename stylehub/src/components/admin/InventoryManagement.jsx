@@ -70,7 +70,10 @@ const InventoryManagement = () => {
 							<td>{product.category}</td>
 
 							<td>
-								<a href='#' className='font-bold text-old-copper-700 hover:text-old-copper-900' onClick={() => openModal(product)}>Edit</a>
+								<div
+									className='cursor-pointer font-bold text-old-copper-700 hover:text-old-copper-900'
+									onClick={() => openModal(product)}
+								>Edit</div>
 							</td>
 						</tr>
 					))}

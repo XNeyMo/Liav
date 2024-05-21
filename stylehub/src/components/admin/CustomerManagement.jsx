@@ -63,7 +63,10 @@ const CustomerManagement = () => {
 							<td>{customer.credits}</td>
 
 							<td>
-								<a href='#' className='font-bold text-old-copper-700 hover:text-old-copper-900' onClick={() => openModal(customer)}>Edit</a>
+								<div
+									className='cursor-pointer font-bold text-old-copper-700 hover:text-old-copper-900'
+									onClick={() => openModal(customer)}
+								>Edit</div>
 							</td>
 						</tr>
 					))}

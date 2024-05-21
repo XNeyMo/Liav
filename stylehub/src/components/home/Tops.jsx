@@ -27,7 +27,7 @@ const Tops = () => {
 			<div className='flex gap-4'>
 			        {products.length > 0 ? (
 					products.map(product => (
-						<a href='#' key={product.id} onClick={() => handleProductClick(product)}>
+						<div className='cursor-pointer' key={product.id} onClick={() => handleProductClick(product)}>
 							<div className='w-[12rem]'>
 								<img src={product.imgref[0]} alt={product.name} />
 							</div>
@@ -40,7 +40,7 @@ const Tops = () => {
 									<p>{product.stock} stock</p>
 								</div>
 							</div>
-						</a>
+						</div>
 					))
 				) : (
 					<p>No products found in the "Tops" category.</p>
