@@ -25,6 +25,9 @@ module.exports = {
       'old-copper-800': '#5F4334',
       'old-copper-900': '#533B30',
       'old-copper-950': '#2F1F19',
+
+      'yellow-200': '#FCF18C',
+      'yellow-100': '#FDFAC4',
     },
   },
   plugins: [],
