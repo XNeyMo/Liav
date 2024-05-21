@@ -16,6 +16,7 @@ const useLogin = () => {
       const response = await axios.get(`https://liavback.onrender.com/user/${email}`);
       const user = response.data;
       console.log(user);
+      console.log({user.password, password});
       if (user.password === password) {
         console.log("validation");
         setAuth({ isAuthenticated: true, isAdmin: user.admin, user });
