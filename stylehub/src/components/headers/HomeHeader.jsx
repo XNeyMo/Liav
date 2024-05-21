@@ -3,10 +3,6 @@ import { React } from 'react';
 import Logo from '../../assets/icons/logo.png';
 
 const HomeHeader = ({ onPageChange, selectedPage }) => {
-	const isSelected = (page) => {
-		return selectedPage === page;
-	}
-
 	return (
 		<header className='px-10 py-1 fixed bg-white w-full flex justify-between items-center *:flex *:gap-5 *:items-center *:*:cursor-pointer'>
 			<img className='h-14' src={Logo} alt="logo" />

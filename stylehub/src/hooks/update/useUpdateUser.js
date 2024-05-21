@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const useUpdateUser = () => {
@@ -14,7 +14,7 @@ const useUpdateUser = () => {
         admin: admin
       };
 
-      const response = await axios.put(`https://liavback.onrender.com/user/${id}/`, userPayload);
+      await axios.put(`https://liavback.onrender.com/user/${id}/`, userPayload);
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');
     }

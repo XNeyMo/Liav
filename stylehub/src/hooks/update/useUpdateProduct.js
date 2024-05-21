@@ -16,9 +16,9 @@ const useUpdateProduct = () => {
       };
 
       if (id) {
-        const response = await axios.put(`https://liavback.onrender.com/product/${id}/`, productPayload);
+        await axios.put(`https://liavback.onrender.com/product/${id}/`, productPayload);
       } else {
-        const response = await axios.post('https://liavback.onrender.com/product/create/', productPayload);
+        await axios.post('https://liavback.onrender.com/product/create/', productPayload);
       }
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');

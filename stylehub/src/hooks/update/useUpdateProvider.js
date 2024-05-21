@@ -21,9 +21,9 @@ const useUpdateProvider = () => {
       };
 
       if (id) {
-        const response = await axios.put(`https://liavback.onrender.com/provider/${id}/`, providerPayload);
+        await axios.put(`https://liavback.onrender.com/provider/${id}/`, providerPayload);
       } else {
-        const response = await axios.post('https://liavback.onrender.com/provider/create/', providerPayload);
+        await axios.post('https://liavback.onrender.com/provider/create/', providerPayload);
       }
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');

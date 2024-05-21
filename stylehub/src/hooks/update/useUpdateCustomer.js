@@ -22,7 +22,7 @@ const useUpdateCustomer = () => {
         },
       };
 
-      const response = await axios.put(`https://liavback.onrender.com/customer/${id}/`, customerPayload);
+      await axios.put(`https://liavback.onrender.com/customer/${id}/`, customerPayload);
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');
     }
