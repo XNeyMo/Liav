@@ -4,12 +4,14 @@ import Modal from '../Modal';
 import CustomerForm from '../forms/CustomerForm'
 
 import useFetchCustomers from '../../hooks/useFetchCustomers';
+import useSearch from '../../hooks/useSearch';
 
 const CustomerManagement = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedCustomer, setSelectedCustomer] = useState(null);
 
 	const customers = useFetchCustomers();
+	const { search, handleSearch, filteredItems } = useSearch(customers, 'email');
 
 	const openModal = (customer) => {
 		setSelectedCustomer(customer);
@@ -28,7 +30,13 @@ const CustomerManagement = () => {
 
 				<div className='flex gap-10'>
 					<form>
-						<input type='text' placeholder='Search' className='bg-old-copper-100 px-4 py-1.5 rounded-xl placeholder:text-old-copper-500' />
+						<input
+							type='text'
+							placeholder='Search'
+							className='bg-old-copper-100 px-4 py-1.5 rounded-xl placeholder:text-old-copper-500'
+							value={search}
+							onChange={handleSearch}
+						/>
 					</form>
 				</div>
 			</div>
@@ -36,7 +44,6 @@ const CustomerManagement = () => {
 			<table className='mt-10 w-full pb-10 block overflow-y-auto text-sm *:*:*:px-6 *:*:*:py-3'>
 				<thead className='text-xs uppercase text-white bg-old-copper-700 sticky top-0'>
 					<tr>
-						<th className='text-left'>Id</th>
 						<th className='text-left'>Username</th>
 						<th className='text-left'>Email</th>
 						<th className='text-left'>Password</th>
@@ -47,9 +54,8 @@ const CustomerManagement = () => {
 				</thead>
 
 				<tbody className='*:border-b *:border-old-copper-700 *:*:whitespace-nowrap overflow-y-auto'>
-					{customers.map(customer => (
+					{filteredItems.map(customer => (
 						<tr key={customer.id}>
-							<td>{customer.id}</td>
 							<td>{customer.username}</td>
 							<td>{customer.email}</td>
 							<td>{customer.password}</td>

@@ -1,5 +1,3 @@
-// TODO: Fix the weight of the tables in the UserManagement, InventoryManagement, and SupplyChainManagement components
-
 import { React } from 'react';
 
 import AdminHeader from '../components/headers/AdminHeader';

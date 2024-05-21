@@ -16,7 +16,7 @@ const useLogin = () => {
       const user = response.data;
 
       if (user.password === password) {
-        setAuth({ isAuthenticated: true, isAdmin: user.admin });
+        setAuth({ isAuthenticated: true, isAdmin: user.admin, user });
         navigate(user.admin ? '/admin' : '/');
       } else {
         setError('Invalid credentials');

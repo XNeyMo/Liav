@@ -4,15 +4,22 @@ import Modal from '../Modal';
 import ProviderForm from '../forms/ProviderForm'
 
 import useFetchProviders from '../../hooks/useFetchProviders';
+import useSearch from '../../hooks/useSearch';
 
 const SupplyChainManagement = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedProvider, setSelectedProvider] = useState(null);
 
 	const providers = useFetchProviders();
+	const { search, handleSearch, filteredItems } = useSearch(providers, 'email');
 
 	const openModal = (provider) => {
 		setSelectedProvider(provider);
+		setIsModalOpen(true);
+	}
+
+	const openCreateModal = () => {
+		setSelectedProvider(null);
 		setIsModalOpen(true);
 	}
 
@@ -28,10 +35,16 @@ const SupplyChainManagement = () => {
 
 				<div className='flex gap-10'>
 					<form>
-						<input type='text' placeholder='Search' className='bg-old-copper-100 px-4 py-1.5 rounded-xl placeholder:text-old-copper-500' />
+						<input
+							type='text'
+							placeholder='Search'
+							className='bg-old-copper-100 px-4 py-1.5 rounded-xl placeholder:text-old-copper-500'
+							value={search}
+							onChange={handleSearch}
+						/>
 					</form>
 
-					<button className='bg-old-copper-700 text-white font-semibold px-6 py-1.5 rounded-xl'>Add Product</button>
+					<button className='bg-old-copper-700 text-white font-semibold px-6 py-1.5 rounded-xl' onClick={openCreateModal}>Add Product</button>
 				</div>
 			</div>
 
@@ -47,7 +60,7 @@ const SupplyChainManagement = () => {
 				</thead>
 
 				<tbody className='*:border-b *:border-old-copper-700 *:*:whitespace-nowrap overflow-y-auto'>
-					{providers.map(provider => (
+					{filteredItems.map(provider => (
 						<tr key={provider.id}>
 							<td>{provider.id}</td>
 							<td>{provider.name}</td>

@@ -1,9 +1,24 @@
-import { React } from 'react';
+import { React, useState } from 'react';
+
+import ProductModal from '../modals/ProductModal';
 
 import useFetchProducts from '../../hooks/useFetchProducts.js';
 
 const Tops = () => {
 	const products = useFetchProducts('Tops');
+	const [selectedProduct, setSelectedProduct] = useState(null);
+
+	const handleProductClick = (product) => {
+		setSelectedProduct(product);
+	}
+
+	const handleCloseModal = () => {
+		setSelectedProduct(null);
+	}
+
+	const handleAddToCart = (product) => {
+		handleCloseModal();
+	}
 
 	return (
 		<section className='px-10'>
@@ -12,7 +27,7 @@ const Tops = () => {
 			<div className='flex gap-4'>
 			        {products.length > 0 ? (
 					products.map(product => (
-						<a href='#' key={product.id}>
+						<a href='#' key={product.id} onClick={() => handleProductClick(product)}>
 							<div className='w-[12rem]'>
 								<img src={product.imgref[0]} alt={product.name} />
 							</div>
@@ -31,6 +46,14 @@ const Tops = () => {
 					<p>No products found in the "Tops" category.</p>
 				)}
 			</div>
+
+			{selectedProduct && (
+				<ProductModal
+					product={selectedProduct}
+					onClose={handleCloseModal}
+					onAddToCart={handleAddToCart}
+				/>
+			)}
 		</section>
 	)
 }

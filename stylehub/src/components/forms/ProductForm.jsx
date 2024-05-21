@@ -1,67 +1,72 @@
 import { React, useState, useEffect } from 'react';
 
-import useUpdateProvider from '../../hooks/update/useUpdateProvider';
+import useUpdateProduct from '../../hooks/update/useUpdateProduct';
 import useDelete from '../../hooks/useDelete';
 
-const ProviderForm = ({ provider, onClose }) => {
-	const { updateProvider, error } = useUpdateProvider();
+const ProductForm = ({ product, onClose }) => {
+	const { updateProduct, error } = useUpdateProduct();
 	const { deleteEntity } = useDelete();
 
 	const [formData, setFormData] = useState({
+		provider_id: '',
 		name: '',
-		email: '',
-		phone: '',
-		address: {
-			street: '',
-			city: '',
-			state: '',
-			zip: '',
-			country: '',
-		},
-		products_id: [],
+		price: 0,
+		stock: 0,
+		category: '',
+		imgref: ['', '', ''],
 	});
 
 	useEffect(() => {
-		if (provider) {
-			setFormData(provider);
+		if (product) {
+			setFormData({
+				...product,
+				imgref: product.imgref || ['', '', ''],
+			});
 		}
-	}, [provider]);
+	}, [product]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 
-		if (name.includes('address.')) {
-			const addressField = name.split('.')[1];
+		if (name.startsWith('imgref')) {
+			const index = parseInt(name.split(' ')[1], 10) - 1;
 
-			setFormData((prevState) => ({
-				...prevState,
-				address: {
-					...prevState.address,
-					[addressField]: value,
-				},
-			}));
+			setFormData((prevState) => {
+				const newImgref = [...prevState.imgref];
+				newImgref[index] = value;
+				return { ...prevState, imgref: newImgref };
+			});
 		} else {
 			setFormData((prevState) => ({
 				...prevState,
-				[name]: value,
+				[name]: name === 'price' ? parseFloat(value) : value,
 			}));
 		}
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await updateProvider(provider?.id, formData);
+		await updateProduct(product?.id, formData);
 		onClose();
 	};
 
 	const handleDelete = async () => {
-		await deleteEntity('provider', provider.id);
+		await deleteEntity('product', product.id);
 		onClose();
 	};
 
 	return (
 		<form onSubmit={handleSubmit} className='flex gap-10'>
 			<div className='flex flex-col gap-4'>
+				<input
+					type='text'
+					name='provider_id'
+					placeholder='Provider ID'
+					value={formData.provider_id}
+					onChange={handleChange}
+					className='border p-2 rounded'
+				/>
+
 				<input
 					type='text'
 					name='name'
@@ -72,28 +77,21 @@ const ProviderForm = ({ provider, onClose }) => {
 				/>
 
 				<input
-					type='email'
-					name='email'
-					placeholder='Email'
-					value={formData.email}
+					type='number'
+					step='0.01'
+					name='price'
+					placeholder='Price'
+					value={formData.price}
 					onChange={handleChange}
 					className='border p-2 rounded'
 				/>
 
 				<input
-					type='text'
-					name='phone'
-					placeholder='Phone'
-					value={formData.phone}
-					onChange={handleChange}
-					className='border p-2 rounded'
-				/>
-
-				<input
-					type='text'
-					name='address.street'
-					placeholder='Street'
-					value={formData.address.street}
+					type='number'
+					step='1'
+					name='stock'
+					placeholder='Stock'
+					value={formData.stock}
 					onChange={handleChange}
 					className='border p-2 rounded'
 				/>
@@ -102,36 +100,36 @@ const ProviderForm = ({ provider, onClose }) => {
 			<div className='flex flex-col gap-4'>
 				<input
 					type='text'
-					name='address.city'
-					placeholder='City'
-					value={formData.address.city}
+					name='category'
+					placeholder='Category'
+					value={formData.category}
 					onChange={handleChange}
 					className='border p-2 rounded'
 				/>
 
 				<input
 					type='text'
-					name='address.state'
-					placeholder='State'
-					value={formData.address.state}
+					name='imgref 1'
+					placeholder='Image Reference 1'
+					value={formData.imgref[0]}
 					onChange={handleChange}
 					className='border p-2 rounded'
 				/>
 
 				<input
 					type='text'
-					name='address.zip'
-					placeholder='ZIP'
-					value={formData.address.zip}
+					name='imgref 2'
+					placeholder='Image Reference 2'
+					value={formData.imgref[1]}
 					onChange={handleChange}
 					className='border p-2 rounded'
 				/>
 
 				<input
 					type='text'
-					name='address.country'
-					placeholder='Country'
-					value={formData.address.country}
+					name='imgref 3'
+					placeholder='Image Reference 3'
+					value={formData.imgref[2]}
 					onChange={handleChange}
 					className='border p-2 rounded'
 				/>
@@ -150,4 +148,4 @@ const ProviderForm = ({ provider, onClose }) => {
 	)
 }
 
-export default ProviderForm;
+export default ProductForm;
