@@ -10,7 +10,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
-    "http://172.17.32.138:3000",
+    "https://liav.netlify.app",
 ]
 
 app.add_middleware(
