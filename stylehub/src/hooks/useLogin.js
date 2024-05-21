@@ -11,13 +11,15 @@ const useLogin = () => {
   const { setAuth } = useAuth();
 
   const Login = async (email, password) => {
-    console.log("hola");
+    console.log("start");
     try {
       const response = await axios.get(`https://liavback.onrender.com/user/${email}`);
       const user = response.data;
       console.log(user);
       if (user.password === password) {
+        console.log("validation");
         setAuth({ isAuthenticated: true, isAdmin: user.admin, user });
+        console.log("state:", { isAuthenticated: true, isAdmin: user.admin, user });
         navigate(user.admin ? '/admin' : '/');
       } else {
         setError('Invalid credentials');
