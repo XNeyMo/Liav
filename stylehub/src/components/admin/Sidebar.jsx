@@ -2,12 +2,6 @@ import { React } from 'react';
 
 import AdminLogo from '../../assets/icons/adminlogo.png';
 
-import UserLogo from '../../assets/icons/usermanagement.svg';
-import InventoryLogo from '../../assets/icons/inventorymanagement.svg';
-import SupplyChainLogo from '../../assets/icons/supplychainmanagement.svg';
-
-import LogoutLogo from '../../assets/icons/logout.svg';
-
 const Sidebar = ({ onPageChange, selectedPage }) => {
 	const isSelected = (page) => {
 		return selectedPage === page;

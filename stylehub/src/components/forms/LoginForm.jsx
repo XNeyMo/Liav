@@ -6,7 +6,7 @@ const LoginForm = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const { Login, error } = useLogin();
+	const { Login } = useLogin();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -23,7 +23,7 @@ const LoginForm = () => {
 
 				<div className='flex items-center justify-between'>
 					<label htmlFor='password' className='block text-sm font-medium leading-6 text-gray'>Password</label>
-					<a href="#" className="font-semibold text-old-copper-700">Forgot password?</a>
+					<div className="cursor-pointer font-semibold text-old-copper-700">Forgot password?</div>
 				</div>
 				<input className='mt-2 block w-full rounded-md border-0 py-1.5 text-gray shadow-sm ring-1 ring-inset ring-gray placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-old-copper-700' type='password' id='password' name='password' onChange={(e) => setPassword(e.target.value)} required />
 

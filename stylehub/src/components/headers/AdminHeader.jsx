@@ -1,6 +1,5 @@
 import { React } from 'react';
 
-import AdminLogo from '../../assets/icons/adminlogo.png';
 import UserLogo from '../../assets/icons/user.svg';
 
 import { useAuth } from '../../hooks/useAuth';
