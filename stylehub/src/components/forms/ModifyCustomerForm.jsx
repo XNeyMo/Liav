@@ -30,10 +30,23 @@ const ModifyCustomerForm = ({ customer, onClose }) => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setFormData((prevState) => ({
-			...prevState,
-			[name]: value,
-		}));
+
+		if (name.includes('address.')) {
+			const addressField = name.split('.')[1];
+
+			setFormData((prevState) => ({
+				...prevState,
+				address: {
+					...prevState.address,
+					[addressField]: value,
+				},
+			}));
+		} else {
+			setFormData((prevState) => ({
+				...prevState,
+				[name]: value,
+			}));
+		}
 	};
 
 	const handleSubmit = async (e) => {
@@ -90,9 +103,8 @@ const ModifyCustomerForm = ({ customer, onClose }) => {
 
 				<input
 					type='text'
-					step='address.street'
-					name='Address Street'
-					placeholder='Address Street'
+					name='address.street'
+					placeholder='Street'
 					value={formData.address.street}
 					onChange={handleChange}
 					className='border p-2 rounded'
@@ -100,9 +112,8 @@ const ModifyCustomerForm = ({ customer, onClose }) => {
 
 				<input
 					type='text'
-					step='address.city'
-					name='Address City'
-					placeholder='Address City'
+					name='address.city'
+					placeholder='City'
 					value={formData.address.city}
 					onChange={handleChange}
 					className='border p-2 rounded'
@@ -113,7 +124,7 @@ const ModifyCustomerForm = ({ customer, onClose }) => {
 				<input
 					type='text'
 					name='address.state'
-					placeholder='Address State'
+					placeholder='State'
 					value={formData.address.state}
 					onChange={handleChange}
 					className='border p-2 rounded'
@@ -121,9 +132,8 @@ const ModifyCustomerForm = ({ customer, onClose }) => {
 
 				<input
 					type='text'
-					step='address.zip'
-					name='Address Zip'
-					placeholder='Address Zip'
+					name='address.zip'
+					placeholder='Zip'
 					value={formData.address.zip}
 					onChange={handleChange}
 					className='border p-2 rounded'
@@ -131,9 +141,8 @@ const ModifyCustomerForm = ({ customer, onClose }) => {
 
 				<input
 					type='text'
-					step='address.country'
-					name='Address Country'
-					placeholder='Address Country'
+					name='address.country'
+					placeholder='Country'
 					value={formData.address.country}
 					onChange={handleChange}
 					className='border p-2 rounded'

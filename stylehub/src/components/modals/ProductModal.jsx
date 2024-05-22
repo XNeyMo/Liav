@@ -1,6 +1,12 @@
 import { React } from 'react';
 
-const ProductModal = ({ product, onClose, onAddToCart }) => {
+const ProductModal = ({ product, onClose }) => {
+	const addtoCart = () => {
+		const cart = JSON.parse(localStorage.getItem('cart')) || [];
+		cart.push(product);
+		localStorage.setItem('cart', JSON.stringify(cart));
+	};
+
 	if (!product) return null;
 
 	return (
@@ -10,7 +16,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
 					<h2 className="text-2xl font-bold mb-4">{product.name}</h2>
 					
 					<button onClick={onClose}>
-						<i class="fa-solid fa-xmark"></i>
+						<i className="fa-solid fa-xmark"></i>
 					</button>
 				</div>
 
@@ -32,7 +38,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
 						</div>
 
 						<button
-							onClick={() => onAddToCart(product)}
+							onClick={addtoCart}
 							className="mt-2 px-4 py-2 bg-old-copper-700 text-white rounded-md">
 
 							Agregar al Carrito
