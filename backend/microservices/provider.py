@@ -1,10 +1,9 @@
 from fastapi import APIRouter, HTTPException
-
 from config.database import providers_collection, products_collection
 from schemes.provider import providers_scheme
 from models.provider import Provider
 from bson import ObjectId
-from typing import List
+
 
 router = APIRouter(tags=['Provider Management'])
 
@@ -17,7 +16,7 @@ async def all_providers():
 
 @router.post('/create/')
 async def create_provider(provider: Provider):
-    provider_dict = provider.dict()
+    provider_dict = provider.model_dump()
     provider_dict['products_id'] = []
     result = providers_collection.insert_one(provider_dict)
 

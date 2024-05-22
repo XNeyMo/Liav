@@ -1,9 +1,6 @@
 from fastapi import APIRouter, HTTPException
-
 from config.database import users_collection, customers_collection
-from schemes.customer import customers_scheme
 from schemes.user import users_scheme
-from models.customer import Customer
 from models.user import User
 from bson import ObjectId
 
@@ -18,12 +15,15 @@ async def all_users():
 
 @router.post('/create/')
 async def create_user(user: User):
+    existing_user = users_collection.find_one({"email": user.email})
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
     result = users_collection.insert_one(dict(user))
     user_id = result.inserted_id
 
     if not user.admin:
         customer_data = {
-            **user.dict(),
+            **user.model_dump(),
             'user_id': str(user_id),
             'credits': 0.0,
             'address': {
@@ -44,8 +44,11 @@ async def create_user(user: User):
 async def get_user(user_email: str):
     for user in get_users():
         if user['email'] == user_email:
-            return user
+            return 
+        else:
+            raise HTTPException(status_code=404, detail="User not found")
 
+            
 @router.put('/{user_id}/')
 async def update_user(user_id: str, user: User):
     user_before_update = users_collection.find_one({'_id': ObjectId(user_id)})
@@ -53,7 +56,7 @@ async def update_user(user_id: str, user: User):
     if not user_before_update:
         raise HTTPException(status_code=404, detail="User not found")
 
-    update = user.dict(exclude_unset=True)
+    update = user.model_dump(exclude_unset=True)
     result = users_collection.update_one(
         {'_id': ObjectId(user_id)},
         {'$set': update}

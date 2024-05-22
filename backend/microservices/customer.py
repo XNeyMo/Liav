@@ -1,11 +1,9 @@
 from fastapi import APIRouter, HTTPException
-
 from config.database import customers_collection, users_collection
 from schemes.customer import customers_scheme
 from models.customer import Customer
-from models.user import User
 from bson import ObjectId
-from typing import List
+
 
 router = APIRouter(tags=['Customer Management'])
 
@@ -29,7 +27,7 @@ async def update_customer(customer_id: str, customer: Customer):
     if not customer_before_update:
         raise HTTPException(status_code=404, detail="Customer not found")
 
-    update = customer.dict(exclude_unset=True)
+    update = customer.model_dump(exclude_unset=True)
     result = customers_collection.update_one(
         {'_id': ObjectId(customer_id)},
         {'$set': update}

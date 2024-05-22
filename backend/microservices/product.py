@@ -4,7 +4,6 @@ from config.database import providers_collection, products_collection
 from schemes.product import products_scheme
 from models.product import Product
 from bson import ObjectId
-from typing import List
 
 router = APIRouter(tags=['Product Management'])
 
@@ -17,7 +16,10 @@ async def all_products():
 
 @router.post('/create/')
 async def create_product(product: Product):
-    product_dict = product.dict()
+    existing_product = products_collection.find_one({"name": product.name})
+    if existing_product:
+        raise HTTPException(status_code=400, detail="Name already registered")
+    product_dict = product.model_dump()
     product_dict['imgref'] = [str(url) for url in product_dict['imgref']]
 
     result = products_collection.insert_one(product_dict)
@@ -55,7 +57,7 @@ async def update_product(product_id: str, product: Product):
     if not product_before_update:
         raise HTTPException(status_code=404, detail="Product not found")
 
-    update = product.dict(exclude_unset=True)
+    update = product.model_dump(exclude_unset=True)
     update['imgref'] = [str(url) for url in update['imgref']]
     result = products_collection.update_one(
         {'_id': ObjectId(product_id)},
@@ -74,8 +76,6 @@ async def update_product(product_id: str, product: Product):
 async def delete_product(product_id: str):
     product = products_collection.find_one({'_id': ObjectId(product_id)})
     provider_id = product['provider_id']
-
-    result = products_collection.delete_one({'_id': ObjectId(product_id)})
 
     if provider_id:
         provider = providers_collection.find_one({'_id': ObjectId(provider_id)})
