@@ -28,7 +28,7 @@ const LoginForm = () => {
 				<input className='mt-2 block w-full rounded-md border-0 py-1.5 text-gray shadow-sm ring-1 ring-inset ring-gray placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-old-copper-700' type='password' id='password' name='password' onChange={(e) => setPassword(e.target.value)} required />
 
 				<div className='h-5 w-full'></div>
-				
+
 				<button type='submit' className='flex w-full justify-center rounded-md bg-old-copper-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm'>Log In</button>
 			</form>
 		</div>

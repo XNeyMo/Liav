@@ -44,11 +44,8 @@ async def create_user(user: User):
 async def get_user(user_email: str):
     for user in get_users():
         if user['email'] == user_email:
-            return 
-        else:
-            raise HTTPException(status_code=404, detail="User not found")
+            return user
 
-            
 @router.put('/{user_id}/')
 async def update_user(user_id: str, user: User):
     user_before_update = users_collection.find_one({'_id': ObjectId(user_id)})
