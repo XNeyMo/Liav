@@ -22,7 +22,11 @@ const useUpdateCustomer = () => {
         },
       };
 
-      await axios.put(`https://liavback.onrender.com/customer/${id}/`, customerPayload);
+      await axios.put(`https://liavback.onrender.com/customer/${id}/`, customerPayload, {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          }
+        });
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');
     }

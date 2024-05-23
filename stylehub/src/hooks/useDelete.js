@@ -26,7 +26,11 @@ const useDelete = () => {
           throw new Error('Invalid entity type');
       }
 
-      await axios.delete(url);
+      await axios.delete(url, {
+        headers: {
+          'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+        }
+      });
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');
     }

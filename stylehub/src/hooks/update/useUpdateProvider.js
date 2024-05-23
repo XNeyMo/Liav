@@ -21,9 +21,17 @@ const useUpdateProvider = () => {
       };
 
       if (id) {
-        await axios.put(`https://liavback.onrender.com/provider/${id}/`, providerPayload);
+        await axios.put(`https://liavback.onrender.com/provider/${id}/`, providerPayload, {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          }
+        });
       } else {
-        await axios.post('https://liavback.onrender.com/provider/create/', providerPayload);
+        await axios.post('https://liavback.onrender.com/provider/create/', providerPayload, {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          }
+        });
       }
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');

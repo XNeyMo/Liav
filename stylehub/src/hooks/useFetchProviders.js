@@ -1,16 +1,26 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const useFetchProviders = () => {
   const [providers, setProviders] = useState([]);
 
   useEffect(() => {
-    fetch('https://liavback.onrender.com/provider/all')
-    .then(response => response.json())
-    .then(data => {
-        setProviders(data);
-    })
-    .catch(error => console.error('Error:', error));
-  });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://liavback.onrender.com/provider/all', {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          }
+        });
+        setProviders(response.data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+
+  }, []);
 
   return providers;
 }

@@ -16,9 +16,17 @@ const useUpdateProduct = () => {
       };
 
       if (id) {
-        await axios.put(`https://liavback.onrender.com/product/${id}/`, productPayload);
+        await axios.put(`https://liavback.onrender.com/product/${id}/`, productPayload, {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          }
+        });
       } else {
-        await axios.post('https://liavback.onrender.com/product/create/', productPayload);
+        await axios.post('https://liavback.onrender.com/product/create/', productPayload, {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          }
+        });
       }
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');

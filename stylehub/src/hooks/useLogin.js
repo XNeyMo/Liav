@@ -12,7 +12,12 @@ const useLogin = () => {
 
   const Login = async (email, password) => {
     try {
-      const response = await axios.get(`https://liavback.onrender.com/user/${email}`);
+      const response = await axios.get(`https://liavback.onrender.com/user/${email}`, {
+        headers: {
+          'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+        }
+      });
+      
       const user = response.data;
       if (user.password === password) {
         setAuth({ isAuthenticated: true, isAdmin: user.admin, user });

@@ -17,7 +17,11 @@ const useRegister = () => {
         admin: false
       };
 
-      await axios.post('https://liavback.onrender.com/user/create/', userPayload);
+      await axios.post('https://liavback.onrender.com/user/create/', userPayload, {
+        headers: {
+          'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+        }
+      });
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');
     }

@@ -15,7 +15,11 @@ const User = () => {
 	useEffect(() => {
 		const fetchCustomerData = async () => {
 			try {
-				const response = await axios.get(`https://liavback.onrender.com/customer/${auth.user.email}`);
+				const response = await axios.get(`https://liavback.onrender.com/customer/${auth.user.email}`, {
+					headers: {
+						'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+					}
+				});
 				setCustomer(response.data);
 			} catch (error) {
 				console.error('Error fetching customer data:', error);

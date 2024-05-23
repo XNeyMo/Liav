@@ -14,7 +14,11 @@ const useUpdateUser = () => {
         admin: admin
       };
 
-      await axios.put(`https://liavback.onrender.com/user/${id}/`, userPayload);
+      await axios.put(`https://liavback.onrender.com/user/${id}/`, userPayload, {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          }
+        });
     } catch (error) {
       setError(error.response?.data?.detail || 'Unknown error');
     }
