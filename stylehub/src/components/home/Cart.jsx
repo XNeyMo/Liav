@@ -87,7 +87,11 @@ const Cart = () => {
 
 		try {
 			formData.credits = customer.credits - total;
-			await axios.put(`https://liavback.onrender.com/customer/${customer.id}`, formData);
+			await axios.put(`https://liavback.onrender.com/customer/${customer.id}`, formData, {
+					headers: {
+						'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+					}
+				});
 			clearCart();
 			alert('Checkout successful');
 		} catch (error) {
