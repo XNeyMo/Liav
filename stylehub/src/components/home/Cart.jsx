@@ -106,7 +106,7 @@ const Cart = () => {
 
 	return (
 		<section>
-			<div className="p-20 flex justify-between gap-10 h-screen">
+			<div className="p-20 flex justify-between gap-10">
 				<div className='flex flex-col gap-5 w-8/12 overflow-auto'>
 					{cartItems.map((item, index) => (
 						<div key={index}>
