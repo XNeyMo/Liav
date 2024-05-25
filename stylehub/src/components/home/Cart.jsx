@@ -70,7 +70,7 @@ const Cart = () => {
 	if (!cartItems.length) {
         return (
 			<main>
-				<div className='p-20 flex items-center h-screen justify-center'>
+				<div className='p-20 flex items-center justify-center'>
 					<h1 className='text-5xl font-bold'>Without Items in Cart</h1>
 				</div>
 			</main>
