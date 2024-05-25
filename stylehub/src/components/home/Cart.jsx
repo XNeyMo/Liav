@@ -9,7 +9,7 @@ const Cart = () => {
 	const [cartItems, setCartItems] = useState([]);
 	const [customer, setCustomer] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
-	const { updateProduct, error } = useUpdateProduct();
+	const { updateProduct } = useUpdateProduct();
 
 	const [formData, setFormData] = useState({
 		user_id: '',
@@ -43,8 +43,8 @@ const Cart = () => {
 					}
 				});
 				setCustomer(response.data);
-			} catch (e) {
-				console.error('Error fetching customer data:', e);
+			} catch (error) {
+				console.error('Error fetching customer data:', error);
 			} finally {
 				setIsLoading(false);
 			}
@@ -102,8 +102,8 @@ const Cart = () => {
 			
 			clearCart();
 			alert('Checkout successful');
-		} catch (e) {
-			console.error('Error during checkout:', e);
+		} catch (error) {
+			console.error('Error during checkout:', error);
 			alert('Checkout failed');
 		}
 	};
