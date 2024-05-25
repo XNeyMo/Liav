@@ -2,12 +2,14 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { useAuth } from '../../hooks/useAuth';
+import useUpdateProduct from '../../hooks/update/useUpdateProduct';
 
 const Cart = () => {
 	const { auth } = useAuth();
 	const [cartItems, setCartItems] = useState([]);
 	const [customer, setCustomer] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const { updateProduct, error: updateError } = useUpdateProduct();
 
 	const [formData, setFormData] = useState({
 		user_id: '',
@@ -92,6 +94,12 @@ const Cart = () => {
 						'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`,
 					}
 				});
+
+			for (const item of cartItems) {
+                		const updatedStock = item.stock - 1; // Assuming each cart item reduces stock by 1
+                		await updateProduct(item.id, { ...item, stock: updatedStock });
+            		}
+			
 			clearCart();
 			alert('Checkout successful');
 		} catch (error) {
