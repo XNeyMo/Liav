@@ -1,6 +1,8 @@
 <div align='center'>
-    <img src='https://github.com/XNeyMo/SJT/blob/main/assets/LiavD.png' alt='Logo' />
+    <img id='theme' src='https://github.com/XNeyMo/Liav/blob/main/assets/Liav.png' height='300px' alt='Logo' />
 </div>
+
+---
 
 # RETAIL COMPANY
 
