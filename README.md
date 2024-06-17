@@ -1,3 +1,7 @@
+<div align='center'>
+    <img src='https://github.com/XNeyMo/SJT/blob/main/assets/LiavD.png' alt='Logo' />
+</div>
+
 # RETAIL COMPANY
 
 A large retail company has multiple legacy systems for e-commerce, in-store purchases, supply chain and inventory management. These systems were built over many years as separate silos with their own databases. With acquisitions and growth, the company now has a complex web of interconnected systems that don't share data well. Customer and product data is fragmented across systems, hampering analytics.
